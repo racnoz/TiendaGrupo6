@@ -115,7 +115,7 @@ public class UsuarioDAO {
 		Conexion conex = new Conexion();
 		try {
 			Statement st = conex.getConnection().createStatement();
-			st.executeUpdate("UPDATE usuarios SET cedula_usuario = '"+usuario.getCedulaUsuario()+"', email_usuario = '"+usuario.getEmailUsuario()+"', nombre_usuario = '"+usuario.getNombreUsuario()+"', password='"+usuario.getPassword()+"', usuario='"+usuario.getUsuario()+"'");
+			st.executeUpdate("UPDATE usuarios SET email_usuario = '"+usuario.getEmailUsuario()+"', nombre_usuario = '"+usuario.getNombreUsuario()+"', password='"+usuario.getPassword()+"', usuario='"+usuario.getUsuario()+"' WHERE cedula_usuario="+usuario.getCedulaUsuario());
 			st.close();
 			conex.desconectar();
 		}catch (Exception e) {

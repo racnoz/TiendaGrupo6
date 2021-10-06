@@ -91,4 +91,36 @@ public class UsuarioDAO {
         }
     }
 	
+	public boolean comprobarUsuario(String usuario, String pass) {
+		ArrayList<UsuarioDTO> miUsuario =  new ArrayList<UsuarioDTO>();
+		Conexion conex = new Conexion();
+		try {
+			PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM usuarios WHERE usuario = ? and password = ?");
+			consulta.setString(1, usuario);
+			consulta.setString(2, pass);
+			ResultSet res = consulta.executeQuery();
+			if(res.next()) {
+				return true;
+			}
+			res.close();
+			consulta.close();
+			conex.desconectar();
+		}catch (Exception e) {
+			//JOptionPane.showMessageDialog(null, "No se pudo agregar al usuario"+e.getMessage());
+		}
+		return false;
+	}
+	
+	public void editarUsuario(UsuarioDTO usuario) {
+		Conexion conex = new Conexion();
+		try {
+			Statement st = conex.getConnection().createStatement();
+			st.executeUpdate("UPDATE usuarios SET cedula_usuario = '"+usuario.getCedulaUsuario()+"', email_usuario = '"+usuario.getEmailUsuario()+"', nombre_usuario = '"+usuario.getNombreUsuario()+"', password='"+usuario.getPassword()+"', usuario='"+usuario.getUsuario()+"'");
+			st.close();
+			conex.desconectar();
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	} 
+	
 }

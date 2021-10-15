@@ -1,12 +1,13 @@
 package com.tienda.DTO;
 
 public class ProductoDTO {
-	int codigoProducto;
-	float ivaCompra;
-	long nitProveedor;
-	String nombreProducto;
-	float precioCompra;
-	float precioVenta;
+	private int codigoProducto;
+	private float ivaCompra;
+	private long nitProveedor;
+	private String nombreProducto;
+	private float precioCompra;
+	private float precioVenta;
+	
 	public int getCodigoProducto() {
 		return codigoProducto;
 	}

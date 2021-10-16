@@ -71,7 +71,7 @@ public class UsuarioDAO {
                 conex.desconectar();
          
         } catch (Exception e) {
-         JOptionPane.showMessageDialog(null, "no se pudo consultar la Persona\n"+e);
+        	 System.out.print("no se pudo consultar el usuario "+e);
         }
         return miCliente;
     }
@@ -90,5 +90,39 @@ public class UsuarioDAO {
             return "No se pudo eliminar el usuario";
         }
     }
+	
+	public boolean comprobarUsuario(String usuario, String pass) {
+		ArrayList<UsuarioDTO> miUsuario =  new ArrayList<UsuarioDTO>();
+		Conexion conex = new Conexion();
+		try {
+			PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM usuarios WHERE usuario = ? and password = ?");
+			consulta.setString(1, usuario);
+			consulta.setString(2, pass);
+			ResultSet res = consulta.executeQuery();
+			if(res.next()) {
+				return true;
+			}
+			res.close();
+			consulta.close();
+			conex.desconectar();
+		}catch (Exception e) {
+			
+		}
+		return false;
+	}
+	
+	public String editarUsuario(UsuarioDTO usuario) {
+		Conexion conex = new Conexion();
+		try {
+			Statement st = conex.getConnection().createStatement();
+			st.executeUpdate("UPDATE usuarios SET email_usuario = '"+usuario.getEmailUsuario()+"', nombre_usuario = '"+usuario.getNombreUsuario()+"', password='"+usuario.getPassword()+"', usuario='"+usuario.getUsuario()+"' WHERE cedula_usuario="+usuario.getCedulaUsuario());
+			st.close();
+			conex.desconectar();
+			return "Edición exitosa";
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+			return "no se ha podido editar el usuario";
+		}
+	} 
 	
 }

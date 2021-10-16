@@ -41,4 +41,18 @@ public class UsuarioController {
         UsuarioDAO Dao = new UsuarioDAO();
         return Dao.eliminarUsuario(cedula);
     }
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value="/comprobarUsuario", method=RequestMethod.GET)
+	public boolean comprobarUsuario(String usuario, String pass) {
+		UsuarioDAO dao = new UsuarioDAO();
+		return dao.comprobarUsuario(usuario, pass);
+	}
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value="/editarUsuario", method=RequestMethod.POST )
+	public String editarUsuario(UsuarioDTO usuario) {
+		UsuarioDAO dao = new UsuarioDAO();
+		return dao.editarUsuario(usuario);
+	}
 }

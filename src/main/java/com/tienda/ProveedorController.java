@@ -15,9 +15,9 @@ public class ProveedorController {
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping("/registrarProveedor")
-	public void registrarProveedor(ProveedorDTO proveedor) {
+	public String registrarProveedor(ProveedorDTO proveedor) {
         ProveedorDAO Dao = new ProveedorDAO(); 
-        Dao.registrarProveedor(proveedor);
+        return Dao.registrarProveedor(proveedor);
     }
 	
 	@CrossOrigin(origins = "*")
@@ -36,8 +36,10 @@ public class ProveedorController {
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping("/eliminarProveedor")
-    public void eliminarProveedor(int nit) {
+    public String eliminarProveedor(int nit) {
         ProveedorDAO Dao = new ProveedorDAO();
-        Dao.eliminarProveedor(nit);
+        return Dao.eliminarProveedor(nit);
     }
+	
+	
 }

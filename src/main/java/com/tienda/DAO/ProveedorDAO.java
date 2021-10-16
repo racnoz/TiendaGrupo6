@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import com.tienda.DTO.ProveedorDTO;
+import com.tienda.DTO.ProveedorDTO;
 
 public class ProveedorDAO {
 	PreparedStatement preparedStatement;
@@ -86,5 +87,17 @@ public class ProveedorDAO {
             System.out.println(e.getMessage());
         }
     }
+	
+	public void editarProveedor(ProveedorDTO proveedor) {
+		Conexion conex = new Conexion();
+		try {
+			Statement st = conex.getConnection().createStatement();
+			st.executeUpdate("UPDATE proveedores SET ciudad_proveedor = '"+proveedor.getCiudadProveedor()+"', direccion_proveedor = '"+proveedor.getDireccionProveedor()+"', nombre_proveedor='"+proveedor.getNombreProveedor()+"', telefono_proveedor='"+proveedor.getTelefonoProveedor()+"' WHERE nitproveedor="+proveedor.getNitProveedor());
+			st.close();
+			conex.desconectar();
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	} 
 	
 }

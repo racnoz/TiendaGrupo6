@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 import com.tienda.DTO.ClienteDTO;
+import com.tienda.DTO.ClienteDTO;
 
 public class ClienteDAO {
 	PreparedStatement preparedStatement;
@@ -86,6 +87,18 @@ public class ClienteDAO {
             System.out.println(e.getMessage());
         }
     }
+	
+	public void editarCliente(ClienteDTO cliente) {
+		Conexion conex = new Conexion();
+		try {
+			Statement st = conex.getConnection().createStatement();
+			st.executeUpdate("UPDATE clientes SET direccion_cliente = '"+cliente.getDireccionCliente()+"', email_cliente = '"+cliente.getEmailCliente()+"', nombre_cliente='"+cliente.getNombreCliente()+"', telefono_cliente='"+cliente.getTelefonoCliente()+"' WHERE cedula_cliente="+cliente.getCedulaCliente());
+			st.close();
+			conex.desconectar();
+		}catch (Exception e) {
+			System.out.println(e.getMessage());
+		}
+	} 
 	
 	
 }

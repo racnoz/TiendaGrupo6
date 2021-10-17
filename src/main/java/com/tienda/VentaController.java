@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.tienda.DAO.VentaDAO;
+import com.tienda.DTO.TotalVentasDTO;
 import com.tienda.DTO.VentaDTO;
 
 @RestController
@@ -47,5 +48,19 @@ public class VentaController {
 		VentaDAO dao = new VentaDAO();
 		dao.editarVenta(venta);
 	}
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value="/listarVentasUsuario", method=RequestMethod.GET)
+	public ArrayList<TotalVentasDTO> listaVentasUsuario(){
+        VentaDAO Dao = new VentaDAO();
+        return Dao.listarVentasUsuario();
+    }
+	
+	@CrossOrigin(origins = "*")
+	@RequestMapping(value="/sumarVentas", method=RequestMethod.GET)
+	public double sumaVentas(){
+        VentaDAO Dao = new VentaDAO();
+        return Dao.sumarVentas();
+    }
 	
 }

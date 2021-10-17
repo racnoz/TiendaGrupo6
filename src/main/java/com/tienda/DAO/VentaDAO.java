@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import javax.swing.JOptionPane;
 
+import com.tienda.DTO.TotalVentasDTO;
 import com.tienda.DTO.VentaDTO;
 
 public class VentaDAO {
@@ -105,4 +106,52 @@ public class VentaDAO {
 			System.out.println(e.getMessage());
 		}
 	} 
+	
+	public ArrayList<TotalVentasDTO> listarVentasUsuario() {
+		ArrayList<TotalVentasDTO> totales = new ArrayList<TotalVentasDTO>();
+        Conexion conex= new Conexion();
+          
+        try {
+        	/*
+        	 * El siguiente comando SQL permite obtener una tabla con los resulatados correspondientes a la cedula del cliente (tabla clientes), nombre del cliente (tabla clientes), y la suma de los valores de ventas (tabla ventas) y los agrupa segúin la cédula del cliente
+        	 * 	*El comando "sum(columna)" permite calcular la suma de una columna de una tabla
+        	 * 	*El comando "tabla1 INNER JOIN tabla 2 ON condition" une las 2 tablas según los valores iguales de una columna de cada tabla
+        	 * 	*El comando "GROUP BY param" agrupa los elementos de una tabla seún un parámetro específico. 
+        	 */
+        	PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT clientes.cedula_cliente, clientes.nombre_cliente, sum(ventas.valor_venta) FROM clientes INNER JOIN ventas ON clientes.cedula_cliente=ventas.cedula_cliente GROUP BY cedula_cliente");
+        	ResultSet res = consulta.executeQuery();
+        	while(res.next()) {
+        		TotalVentasDTO total = new TotalVentasDTO();
+        		total.setSuma(Double.parseDouble(res.getString("sum(ventas.valor_venta)")));
+        		total.setCedula(Integer.parseInt(res.getString("cedula_cliente")));
+        		total.setNombre(res.getString("nombre_cliente"));
+        		totales.add(total);
+	       }
+	       res.close();
+	       consulta.close();
+	       conex.desconectar();
+       } catch (Exception e) {
+    	   e.printStackTrace();//JOptionPane.showMessageDialog(null, "no se pudo consultar la Persona\n"+e);
+       }
+        return totales;
+	}
+	
+	public double sumarVentas() {
+		double suma = 0;
+		Conexion conex= new Conexion();
+        
+        try {
+         PreparedStatement consulta = conex.getConnection().prepareStatement("select sum(valor_venta) from ventas");
+         ResultSet res = consulta.executeQuery();
+         res.next();
+         suma =Double.parseDouble(res.getString("sum(valor_venta)"));
+         res.close();
+         consulta.close();
+         conex.desconectar();
+       } catch (Exception e) {
+         e.printStackTrace();//JOptionPane.showMessageDialog(null, "no se pudo consultar la Persona\n"+e);
+       }
+       return suma;
+	}
+		
 }

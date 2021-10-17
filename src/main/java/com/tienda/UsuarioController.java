@@ -44,7 +44,7 @@ public class UsuarioController {
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/comprobarUsuario", method=RequestMethod.GET)
-	public boolean comprobarUsuario(String usuario, String pass) {
+	public long comprobarUsuario(String usuario, String pass) {
 		UsuarioDAO dao = new UsuarioDAO();
 		return dao.comprobarUsuario(usuario, pass);
 	}

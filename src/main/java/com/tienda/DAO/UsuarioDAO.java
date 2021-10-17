@@ -91,8 +91,7 @@ public class UsuarioDAO {
         }
     }
 	
-	public boolean comprobarUsuario(String usuario, String pass) {
-		ArrayList<UsuarioDTO> miUsuario =  new ArrayList<UsuarioDTO>();
+	public long comprobarUsuario(String usuario, String pass) {
 		Conexion conex = new Conexion();
 		try {
 			PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM usuarios WHERE usuario = ? and password = ?");
@@ -100,7 +99,7 @@ public class UsuarioDAO {
 			consulta.setString(2, pass);
 			ResultSet res = consulta.executeQuery();
 			if(res.next()) {
-				return true;
+				return Long.parseLong(res.getString("cedula_usuario"));
 			}
 			res.close();
 			consulta.close();
@@ -108,7 +107,7 @@ public class UsuarioDAO {
 		}catch (Exception e) {
 			//JOptionPane.showMessageDialog(null, "No se pudo agregar al usuario"+e.getMessage());
 		}
-		return false;
+		return -1;
 	}
 	
 	public void editarUsuario(UsuarioDTO usuario) {

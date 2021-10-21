@@ -18,7 +18,7 @@ public class UsuarioDAO {
             st.close();
             conex.desconectar();
             return "Se ha registrado exitosamente el usuario";
-
+            
         }catch(Exception e) {
             System.out.println(e.getMessage());
             return "No se pudo agregar el usuario";
@@ -48,11 +48,11 @@ public class UsuarioDAO {
         }
         return miUsuario;
     }
-
+	
 	public ArrayList<UsuarioDTO> listaDeUsuarios() {
         ArrayList< UsuarioDTO> miCliente = new ArrayList< UsuarioDTO>();
         Conexion conex= new Conexion();
-
+          
         try {
          PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM usuarios");
          ResultSet res = consulta.executeQuery();
@@ -63,19 +63,19 @@ public class UsuarioDAO {
                 usuario.setNombreUsuario(res.getString("nombre_usuario"));
                 usuario.setPassword(res.getString("password"));
                 usuario.setUsuario(res.getString("usuario"));
-
+        
           miCliente.add(usuario);
                 }
                 res.close();
                 consulta.close();
                 conex.desconectar();
-
+         
         } catch (Exception e) {
-        	 System.out.print("no se pudo consultar el usuario "+e);
+         JOptionPane.showMessageDialog(null, "no se pudo consultar la Persona\n"+e);
         }
         return miCliente;
     }
-
+	
 	public String eliminarUsuario(int cedula) {
         Conexion conex= new Conexion();
         try {
@@ -83,15 +83,15 @@ public class UsuarioDAO {
             preparedStatement = conex.getConnection().prepareStatement(query);
             preparedStatement.setInt(1, cedula);
             preparedStatement.executeUpdate();
-
+            
             return "Se ha eliminado el usuario";
         }catch(Exception e) {
             System.out.println(e.getMessage());
             return "No se pudo eliminar el usuario";
         }
     }
-
-	public long comprobarUsuario(String usuario, String pass) {
+	
+	public long comprobarUsuarioLong(String usuario, String pass) {
 		Conexion conex = new Conexion();
 		try {
 			PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT * FROM usuarios WHERE usuario = ? and password = ?");
@@ -109,7 +109,7 @@ public class UsuarioDAO {
 		}
 		return -1;
 	}
-
+	
 	public void editarUsuario(UsuarioDTO usuario) {
 		Conexion conex = new Conexion();
 		try {
@@ -120,6 +120,6 @@ public class UsuarioDAO {
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-	}
-
+	} 
+	
 }

@@ -18,9 +18,16 @@ public class VentaDAO {
             Statement st = conex.getConnection().createStatement();
             st.executeUpdate("INSERT INTO ventas VALUES ('"+venta.getCodigoVenta()+"', '"
                      +venta.getCedulaCliente()+"', '"+venta.getCedulaUsuario()+"','"+venta.getIvaVenta()+"', '"+venta.getTotalVenta()+"', '"+venta.getValorVenta()+"')");
+            
+            PreparedStatement consulta = conex.getConnection().prepareStatement("SELECT MAX(codigo_venta) from ventas;");
+            ResultSet res = consulta.executeQuery();
+            res.next();
+            String maxCode =res.getString("MAX(codigo_venta)");
+         
+            
             st.close();
             conex.desconectar();
-            return "Se ha registrado exitosamente la venta";
+            return maxCode;
             
         }catch(Exception e) {
             System.out.println(e.getMessage());
@@ -39,7 +46,7 @@ public class VentaDAO {
                 venta.setCodigoVenta(Integer.parseInt(res.getString("codigo_venta")));
                 venta.setCedulaCliente(Long.parseLong(res.getString("cedula_cliente")));
                 venta.setCedulaUsuario(Long.parseLong(res.getString("cedula_usuario")));
-                venta.setIvaVenta(Double.parseDouble(res.getString("ivaventa")));
+                venta.setIvaVenta(Double.parseDouble(res.getString("iva_venta")));
                 venta.setTotalVenta(Double.parseDouble(res.getString("total_venta")));
                 venta.setValorVenta(Double.parseDouble(res.getString("valor_venta")));
                 miVenta.add(venta);
@@ -66,7 +73,7 @@ public class VentaDAO {
              venta.setCodigoVenta(Integer.parseInt(res.getString("codigo_venta")));
              venta.setCedulaCliente(Long.parseLong(res.getString("cedula_cliente")));
              venta.setCedulaUsuario(Long.parseLong(res.getString("cedula_usuario")));
-             venta.setIvaVenta(Double.parseDouble(res.getString("ivaventa")));
+             venta.setIvaVenta(Double.parseDouble(res.getString("iva_venta")));
              venta.setTotalVenta(Double.parseDouble(res.getString("total_venta")));
              venta.setValorVenta(Double.parseDouble(res.getString("valor_venta")));
              miVenta.add(venta);
@@ -76,7 +83,7 @@ public class VentaDAO {
         conex.desconectar();
          
        } catch (Exception e) {
-         //JOptionPane.showMessageDialog(null, "no se pudo consultar la Persona\n"+e);
+    	   System.out.print(e);
        }
         return miVenta;
     }

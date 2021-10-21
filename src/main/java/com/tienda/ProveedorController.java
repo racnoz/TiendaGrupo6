@@ -15,35 +15,35 @@ import com.tienda.DTO.ProveedorDTO;
 
 @RestController
 public class ProveedorController {
-
+	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/registrarProveedor", method=RequestMethod.POST )
 	public void registrarProveedor(ProveedorDTO proveedor) {
-        ProveedorDAO Dao = new ProveedorDAO();
-        return Dao.registrarProveedor(proveedor);
+        ProveedorDAO Dao = new ProveedorDAO(); 
+        Dao.registrarProveedor(proveedor);
     }
-
+	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/consultarProveedor", method=RequestMethod.GET)
 	public ArrayList<ProveedorDTO> consultarProveedor(int nit){
-        ProveedorDAO Dao = new ProveedorDAO();
+        ProveedorDAO Dao = new ProveedorDAO(); 
         return Dao.consultarProveedor(nit);
     }
-
+	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/listarProveedores", method=RequestMethod.GET)
 	public ArrayList<ProveedorDTO> listaDeProveedores(){
         ProveedorDAO Dao = new ProveedorDAO();
         return Dao.listaDeProveedores();
     }
-
+	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/eliminarProveedores", method=RequestMethod.DELETE)
     public void eliminarProveedor(int nit) {
         ProveedorDAO Dao = new ProveedorDAO();
-        return Dao.eliminarProveedor(nit);
+        Dao.eliminarProveedor(nit);
     }
-
+	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/editarProveedor", method=RequestMethod.POST )
 	public void editarProveedor(ProveedorDTO proveedor) {

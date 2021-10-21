@@ -20,7 +20,7 @@ public class ProductoDAO {
             st.close();
             conex.desconectar();
             return "Se ha registrado exitosamente el producto";
-
+            
         }catch(Exception e) {
             System.out.println(e.getMessage());
             return "No se pudo agregar el producto";
@@ -47,12 +47,12 @@ public class ProductoDAO {
             consulta.close();
             conex.desconectar();
         }catch(Exception e) {
-            e.printStackTrace();
+            e.printStackTrace(); 
         	System.out.print("no se pudo consultar el producto");
         }
         return miProducto;
     }
-
+	
 	public ArrayList<ProductoDTO> listaDeProductos() {
         ArrayList< ProductoDTO> miProducto = new ArrayList< ProductoDTO>();
         Conexion conex= new Conexion();
@@ -72,7 +72,7 @@ public class ProductoDAO {
         res.close();
         consulta.close();
         conex.desconectar();
-
+         
         } catch (Exception e) {
          //JOptionPane.showMessageDialog(null, "no se pudo consultar la Persona\n"+e);
         	e.printStackTrace();
@@ -92,7 +92,7 @@ public class ProductoDAO {
             return "No se pudo eliminar el producto";
         }
     }
-
+	
 	public void editarProducto(ProductoDTO producto) {
 		Conexion conex = new Conexion();
 		try {
@@ -103,5 +103,5 @@ public class ProductoDAO {
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
 		}
-	}
+	} 
 }

@@ -51,9 +51,9 @@ public class VentaController {
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/listarVentasUsuario", method=RequestMethod.GET)
-	public ArrayList<TotalVentasDTO> listaVentasUsuario(){
+	public ArrayList<VentaDTO> listaVentasUsuario(){
         VentaDAO Dao = new VentaDAO();
-        return Dao.listarVentasUsuario();
+        return Dao.listaDeVentas();
     }
 	
 	@CrossOrigin(origins = "*")

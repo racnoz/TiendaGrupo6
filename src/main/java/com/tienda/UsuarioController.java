@@ -13,21 +13,21 @@ import com.tienda.DTO.UsuarioDTO;
 
 @RestController
 public class UsuarioController {
-
+	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/registrarUsuario", method=RequestMethod.POST )
 	public String registrarUsuario(UsuarioDTO usuario) {
-        UsuarioDAO Dao = new UsuarioDAO();
+        UsuarioDAO Dao = new UsuarioDAO(); 
        return Dao.registrarUsuario(usuario);
     }
-
+	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/consultarUsuario", method=RequestMethod.GET)
 	public ArrayList<UsuarioDTO> consultarUsuario(int documento){
-        UsuarioDAO Dao = new UsuarioDAO();
+        UsuarioDAO Dao = new UsuarioDAO(); 
         return Dao.consultarUsuario(documento);
     }
-
+	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/listarUsuarios", method=RequestMethod.GET)
 	public ArrayList<UsuarioDTO> listaDeUsuarios(){
@@ -41,19 +41,19 @@ public class UsuarioController {
         UsuarioDAO Dao = new UsuarioDAO();
         return Dao.eliminarUsuario(cedula);
     }
-
+	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/comprobarUsuario", method=RequestMethod.GET)
 	public long comprobarUsuario(String usuario, String pass) {
 		UsuarioDAO dao = new UsuarioDAO();
-		return dao.comprobarUsuario(usuario, pass);
+		return dao.comprobarUsuarioLong(usuario, pass);
 	}
-
+	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/editarUsuario", method=RequestMethod.POST )
 	public void editarUsuario(UsuarioDTO usuario) {
 		UsuarioDAO dao = new UsuarioDAO();
 		dao.editarUsuario(usuario);
 	}
-
+	
 }

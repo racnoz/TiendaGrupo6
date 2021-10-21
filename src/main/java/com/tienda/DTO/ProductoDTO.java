@@ -7,7 +7,7 @@ public class ProductoDTO {
 	private String nombreProducto;
 	private float precioCompra;
 	private float precioVenta;
-
+	
 	public int getCodigoProducto() {
 		return codigoProducto;
 	}
@@ -44,5 +44,5 @@ public class ProductoDTO {
 	public void setPrecioVenta(float precioVenta) {
 		this.precioVenta = precioVenta;
 	}
-
+	
 }

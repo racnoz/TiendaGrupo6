@@ -12,40 +12,40 @@ import com.tienda.DTO.ProductoDTO;
 
 @RestController
 public class ProductoController {
-
+	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/registrarProducto", method=RequestMethod.POST )
 	public String registrarProducto(ProductoDTO producto) {
-        ProductoDAO Dao = new ProductoDAO();
+        ProductoDAO Dao = new ProductoDAO(); 
        return Dao.registrarProducto(producto);
     }
-
+	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/consultarProducto", method=RequestMethod.GET)
 	public ArrayList<ProductoDTO> consultarProducto(int codigo){
-        ProductoDAO Dao = new ProductoDAO();
+        ProductoDAO Dao = new ProductoDAO(); 
         return Dao.consultarProducto(codigo);
     }
-
+	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/listarProductos", method=RequestMethod.GET)
 	public ArrayList<ProductoDTO> listaDeProductos(){
         ProductoDAO Dao = new ProductoDAO();
         return Dao.listaDeProductos();
     }
-
+	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/eliminarProductos", method=RequestMethod.DELETE)
     public String eliminarProducto(int codigo) {
         ProductoDAO Dao = new ProductoDAO();
         return Dao.eliminarProducto(codigo);
     }
-
+		
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/editarProducto", method=RequestMethod.POST )
 	public void editarProducto(ProductoDTO producto) {
 		ProductoDAO dao = new ProductoDAO();
 		dao.editarProducto(producto);
 	}
-
+	
 }

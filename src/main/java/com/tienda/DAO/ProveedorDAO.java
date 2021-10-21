@@ -10,19 +10,18 @@ import com.tienda.DTO.ProveedorDTO;
 
 public class ProveedorDAO {
 	PreparedStatement preparedStatement;
-	public String registrarProveedor(ProveedorDTO proveedor) {
+	public void registrarProveedor(ProveedorDTO proveedor) {
         Conexion conex = new Conexion();
         try {
             Statement st = conex.getConnection().createStatement();
             st.executeUpdate("INSERT INTO proveedores VALUES ('"+proveedor.getNitProveedor()+"', '"
                      +proveedor.getCiudadProveedor()+"', '"+proveedor.getDireccionProveedor()+"','"+proveedor.getNombreProveedor()+"','"+proveedor.getTelefonoProveedor()+"')");
-            
+            JOptionPane.showMessageDialog(null, "Se ha registrado el proveedor exitosamente", "Información", JOptionPane.INFORMATION_MESSAGE);;
             st.close();
             conex.desconectar();
-            return "Se ha registrado exitosamente el proveedor";
         }catch(Exception e) {
             System.out.println(e.getMessage());
-            return "No se pudo agregar el proveedor";
+            JOptionPane.showMessageDialog(null, "No se puedo agregar al proveedor");
         }
     }
 	public ArrayList<ProveedorDTO> consultarProveedor(int nit){
@@ -45,7 +44,7 @@ public class ProveedorDAO {
             consulta.close();
             conex.desconectar();
         }catch(Exception e) {
-        	 System.out.print("no se pudo consultar al proveedor ");
+            JOptionPane.showMessageDialog(null, "no se pudo consultar al proveedor "+e);
         }
         return miCliente;
     }
@@ -72,22 +71,20 @@ public class ProveedorDAO {
                 conex.desconectar();
          
         } catch (Exception e) {
-        	 System.out.print( "no se pudo consultar el proveedor"+e);
+         JOptionPane.showMessageDialog(null, "no se pudo consultar la Persona\n"+e);
         }
         return miCliente;
     }
 	
-	public String eliminarProveedor(int nit) {
+	public void eliminarProveedor(int nit) {
         Conexion conex= new Conexion();
         try {
             String query = "DELETE FROM proveedores WHERE nitproveedor = ?";
             preparedStatement = conex.getConnection().prepareStatement(query);
             preparedStatement.setInt(1, nit);
             preparedStatement.executeUpdate();
-            return "Se ha eliminado el proveedor";
         }catch(Exception e) {
             System.out.println(e.getMessage());
-            return "No se pudo eliminar el proveedor";
         }
     }
 	

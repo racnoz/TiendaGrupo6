@@ -1,29 +1,29 @@
 package com.tienda.DTO;
 
 public class ProductoDTO {
-	private Integer codigoProducto;
-	private double ivaCompra;
-    private Integer nitProveedor;
-    private String nombreProducto;
-    private double precioCompra;
-    private double precioVenta;
-    
-	public Integer getCodigoProducto() {
+	private int codigoProducto;
+	private float ivaCompra;
+	private long nitProveedor;
+	private String nombreProducto;
+	private float precioCompra;
+	private float precioVenta;
+
+	public int getCodigoProducto() {
 		return codigoProducto;
 	}
-	public void setCodigoProducto(Integer codigoProducto) {
+	public void setCodigoProducto(int codigoProducto) {
 		this.codigoProducto = codigoProducto;
 	}
-	public double getIvaCompra() {
+	public float getIvaCompra() {
 		return ivaCompra;
 	}
-	public void setIvaCompra(double ivaCompra) {
+	public void setIvaCompra(float ivaCompra) {
 		this.ivaCompra = ivaCompra;
 	}
-	public Integer getNitProveedor() {
+	public long getNitProveedor() {
 		return nitProveedor;
 	}
-	public void setNitProveedor(Integer nitProveedor) {
+	public void setNitProveedor(long nitProveedor) {
 		this.nitProveedor = nitProveedor;
 	}
 	public String getNombreProducto() {
@@ -32,18 +32,17 @@ public class ProductoDTO {
 	public void setNombreProducto(String nombreProducto) {
 		this.nombreProducto = nombreProducto;
 	}
-	public double getPrecioCompra() {
+	public float getPrecioCompra() {
 		return precioCompra;
 	}
-	public void setPrecioCompra(double precioCompra) {
+	public void setPrecioCompra(float precioCompra) {
 		this.precioCompra = precioCompra;
 	}
-	public double getPrecioVenta() {
+	public float getPrecioVenta() {
 		return precioVenta;
 	}
-	public void setPrecioVenta(double precioVenta) {
+	public void setPrecioVenta(float precioVenta) {
 		this.precioVenta = precioVenta;
 	}
-    
-    
+
 }

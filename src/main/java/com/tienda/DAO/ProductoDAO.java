@@ -93,15 +93,17 @@ public class ProductoDAO {
         }
     }
 	
-	public void editarProducto(ProductoDTO producto) {
+	public String editarProducto(ProductoDTO producto) {
 		Conexion conex = new Conexion();
 		try {
 			Statement st = conex.getConnection().createStatement();
 			st.executeUpdate("UPDATE productos SET ivacompra = '"+producto.getIvaCompra()+"', nitproveedor = '"+producto.getNitProveedor()+"', nombre_producto='"+producto.getNombreProducto()+"', precio_compra='"+producto.getPrecioCompra()+"', precio_venta='"+producto.getPrecioVenta()+"' WHERE codigo_producto="+producto.getCodigoProducto());
 			st.close();
 			conex.desconectar();
+			 return "Se ha editado exitosamente";
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
+			return "no se pudo completar la operación!";
 		}
 	} 
 }

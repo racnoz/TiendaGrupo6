@@ -10,18 +10,18 @@ import com.tienda.DTO.ProveedorDTO;
 
 public class ProveedorDAO {
 	PreparedStatement preparedStatement;
-	public void registrarProveedor(ProveedorDTO proveedor) {
+	public String registrarProveedor(ProveedorDTO proveedor) {
         Conexion conex = new Conexion();
         try {
             Statement st = conex.getConnection().createStatement();
             st.executeUpdate("INSERT INTO proveedores VALUES ('"+proveedor.getNitProveedor()+"', '"
-                     +proveedor.getCiudadProveedor()+"', '"+proveedor.getDireccionProveedor()+"','"+proveedor.getNombreProveedor()+"','"+proveedor.getTelefonoProveedor()+"')");
-            JOptionPane.showMessageDialog(null, "Se ha registrado el proveedor exitosamente", "Información", JOptionPane.INFORMATION_MESSAGE);;
+                     +proveedor.getCiudadProveedor()+"', '"+proveedor.getDireccionProveedor()+"','"+proveedor.getNombreProveedor()+"','"+proveedor.getTelefonoProveedor()+"')"); 
             st.close();
             conex.desconectar();
+            return "Se ha registrado exitosamente el proveedor";
         }catch(Exception e) {
             System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(null, "No se puedo agregar al proveedor");
+            return "No se pudo agregar el proveedor";
         }
     }
 	public ArrayList<ProveedorDTO> consultarProveedor(int nit){
@@ -76,27 +76,32 @@ public class ProveedorDAO {
         return miCliente;
     }
 	
-	public void eliminarProveedor(int nit) {
+	public String eliminarProveedor(int nit) {
         Conexion conex= new Conexion();
         try {
             String query = "DELETE FROM proveedores WHERE nitproveedor = ?";
             preparedStatement = conex.getConnection().prepareStatement(query);
             preparedStatement.setInt(1, nit);
             preparedStatement.executeUpdate();
+            return "Se ha eliminado el proveedor";
         }catch(Exception e) {
             System.out.println(e.getMessage());
+            return "No se pudo eliminar el proveedor";
         }
     }
 	
-	public void editarProveedor(ProveedorDTO proveedor) {
+	public String editarProveedor(ProveedorDTO proveedor) {
 		Conexion conex = new Conexion();
 		try {
 			Statement st = conex.getConnection().createStatement();
 			st.executeUpdate("UPDATE proveedores SET ciudad_proveedor = '"+proveedor.getCiudadProveedor()+"', direccion_proveedor = '"+proveedor.getDireccionProveedor()+"', nombre_proveedor='"+proveedor.getNombreProveedor()+"', telefono_proveedor='"+proveedor.getTelefonoProveedor()+"' WHERE nitproveedor="+proveedor.getNitProveedor());
 			st.close();
 			conex.desconectar();
+			 return "Se ha editado exitosamente";
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
+			 return "no se pudo completar la operación!";
+
 		}
 	} 
 	

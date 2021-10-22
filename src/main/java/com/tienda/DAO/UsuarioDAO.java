@@ -110,15 +110,17 @@ public class UsuarioDAO {
 		return -1;
 	}
 	
-	public void editarUsuario(UsuarioDTO usuario) {
+	public String editarUsuario(UsuarioDTO usuario) {
 		Conexion conex = new Conexion();
 		try {
 			Statement st = conex.getConnection().createStatement();
 			st.executeUpdate("UPDATE usuarios SET email_usuario = '"+usuario.getEmailUsuario()+"', nombre_usuario = '"+usuario.getNombreUsuario()+"', password='"+usuario.getPassword()+"', usuario='"+usuario.getUsuario()+"' WHERE cedula_usuario="+usuario.getCedulaUsuario());
 			st.close();
 			conex.desconectar();
+			 return "Se ha editado exitosamente";
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
+			 return "no se pudo completar la operación!";
 		}
 	} 
 	

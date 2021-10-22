@@ -43,9 +43,9 @@ public class ProductoController {
 		
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/editarProducto", method=RequestMethod.POST )
-	public void editarProducto(ProductoDTO producto) {
+	public String editarProducto(ProductoDTO producto) {
 		ProductoDAO dao = new ProductoDAO();
-		dao.editarProducto(producto);
+		return dao.editarProducto(producto);
 	}
 	
 }

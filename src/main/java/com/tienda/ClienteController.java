@@ -18,9 +18,9 @@ public class ClienteController {
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/registrarCliente", method=RequestMethod.POST )
-	public void registrarCliente(ClienteDTO cliente) {
+	public String registrarCliente(ClienteDTO cliente) {
         ClienteDAO Dao = new ClienteDAO(); 
-        Dao.registrarCliente(cliente);
+        return Dao.registrarCliente(cliente);
     }
 	
 	@CrossOrigin(origins = "*")
@@ -39,15 +39,15 @@ public class ClienteController {
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/eliminarClientes", method=RequestMethod.DELETE)
-    public void eliminarCliente(int cedula) {
+    public String eliminarCliente(int cedula) {
         ClienteDAO Dao = new ClienteDAO();
-        Dao.eliminarCliente(cedula);
+        return Dao.eliminarCliente(cedula);
     }
 	
 	@CrossOrigin(origins = "*")
 	@RequestMapping(value="/editarCliente", method=RequestMethod.POST )
-	public void editarCliente(ClienteDTO cliente) {
+	public String editarCliente(ClienteDTO cliente) {
 		ClienteDAO dao = new ClienteDAO();
-		dao.editarCliente(cliente);
+		return dao.editarCliente(cliente);
 	}
 }

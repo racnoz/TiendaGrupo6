@@ -10,18 +10,19 @@ import com.tienda.DTO.ClienteDTO;
 
 public class ClienteDAO {
 	PreparedStatement preparedStatement;
-	public void registrarCliente(ClienteDTO cliente) {
+	public String registrarCliente(ClienteDTO cliente) {
         Conexion conex = new Conexion();
         try {
             Statement st = conex.getConnection().createStatement();
             st.executeUpdate("INSERT INTO clientes VALUES ('"+cliente.getCedulaCliente()+"', '"
                      +cliente.getDireccionCliente()+"', '"+cliente.getEmailCliente()+"','"+cliente.getNombreCliente()+"','"+cliente.getTelefonoCliente()+"')");
-            JOptionPane.showMessageDialog(null, "Se ha registrado el cliente exitosamente", "Información", JOptionPane.INFORMATION_MESSAGE);;
+            
             st.close();
             conex.desconectar();
+            return "Se ha registrado el cliente exitosamente";
         }catch(Exception e) {
             System.out.println(e.getMessage());
-            JOptionPane.showMessageDialog(null, "No se puedo agregar al cliente");
+            return "No se puedo agregar al cliente";
         }
     }
 	public ArrayList<ClienteDTO> consultarCliente(int documento){
@@ -76,27 +77,31 @@ public class ClienteDAO {
         return miCliente;
     }
 	
-	public void eliminarCliente(int cedula) {
+	public String eliminarCliente(int cedula) {
         Conexion conex= new Conexion();
         try {
             String query = "DELETE FROM clientes WHERE cedula_cliente = ?";
             preparedStatement = conex.getConnection().prepareStatement(query);
             preparedStatement.setInt(1, cedula);
             preparedStatement.executeUpdate();
+            return "Se ha eliminado exitosamente";
         }catch(Exception e) {
             System.out.println(e.getMessage());
+            return "no se pudo completar la operación!";
         }
     }
 	
-	public void editarCliente(ClienteDTO cliente) {
+	public String editarCliente(ClienteDTO cliente) {
 		Conexion conex = new Conexion();
 		try {
 			Statement st = conex.getConnection().createStatement();
 			st.executeUpdate("UPDATE clientes SET direccion_cliente = '"+cliente.getDireccionCliente()+"', email_cliente = '"+cliente.getEmailCliente()+"', nombre_cliente='"+cliente.getNombreCliente()+"', telefono_cliente='"+cliente.getTelefonoCliente()+"' WHERE cedula_cliente="+cliente.getCedulaCliente());
 			st.close();
 			conex.desconectar();
+			 return "Se ha editado exitosamente";
 		}catch (Exception e) {
 			System.out.println(e.getMessage());
+			 return "no se pudo completar la operación!";
 		}
 	} 
 	
